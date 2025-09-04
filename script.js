@@ -99,7 +99,7 @@ let currentSong = new Audio();
 
 
 async function fetchSongs() {
-    let a = await fetch("https://github.com/hafscammer/Spotify/tree/main/songs")
+    let a = await fetch("http://127.0.0.1:5501/songs/")
     let response = await a.text()
     let div = document.createElement("div")
     div.innerHTML = response;
