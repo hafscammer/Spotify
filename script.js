@@ -48,7 +48,6 @@ let translate
         document.getElementById("main_img").src = "evelyn.avif"
         document.getElementById("mobile_hidden").classList.add("hidden");
         translate = 1
-        console.log(translate)
     });
 
 
@@ -70,7 +69,6 @@ let translate
         document.getElementById("main_img").src = "bmw2.jpg"
         document.getElementById("mobile_hidden").classList.add("hidden");
         translate = 2
-            console.log(translate)
     });
 
 
