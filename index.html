@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Spotify- Web Player: Music for everyone</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=CircularSp-Grek:ital,wght@0,200..800;1,200..800&family=Oswald:wght@200..700&display=swap');
+
+        body {
+            font-family: "CircularSp-Grek", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        #yourPlayList li {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            gap: 8px;
+            border: 2px solid;
+            border-radius: 3px;
+            padding: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            height: 60px;
+            flex-shrink: 0;
+        }
+
+        #yourPlayList li:hover {
+            border: 2px solid white;
+            color: white;
+        }
+
+        #yourPlayList li #sName {
+            display: flex;
+            align-items: center;
+            width: 73%;
+            gap: 8px;
+        }
+
+        #yourPlayList li #play {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            gap: 6px;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white tracking-tight">
+
+    <!-- //nav starts here -->
+    <nav class="flex justify-between items-center h-16">
+        <span class="flex  ml-6 items-center gap-2">
+            <div class="flex justify-center items-center gap-1">
+                <img style="width: 32px; height: 32px;" src="logo.svg" alt="">
+                <p class="md:hidden text-xl">Spotify</p>
+            </div>
+            <div class="bg-[#353232e6] w-12 h-12 rounded-4xl hidden md:flex items-center justify-center ml-3.5">
+                <img style="width: 26px; height: 26px;" src="home.svg" alt="">
+            </div>
+            <div
+                class="hidden md:flex items-center justify-between bg-[#353232e6] w-[480px] h-12 rounded-3xl focus:outline-2 cursor-auto">
+                <span class="flex gap-3 ml-3 font-medium">
+                    <img style="width: 26px; height: 26px;" src="search.svg" alt="">
+                    <input type="text" placeholder="What do you want to play?" class=" w-52 focus:outline-none" />
+                </span>
+                <span class="flex gap-3 mr-3">
+                    <div class="w-0.5 h-7 bg-[#b3b3b3] "></div>
+                    <img style="width: 26px; height: 26px;" src="browse.svg" alt="">
+                </span>
+            </div>
+        </span>
+
+        <!-- only in mobile start-->
+        <div class="md:hidden flex justify-between items-center gap-x-5">
+            <div class=" flex justify-center items-center font-bold bg-white text-black rounded-4xl w-28 h-10">
+                Open App
+            </div>
+            <div id="hamburger" class="flex flex-col gap-y-1.5 space-x-6">
+                <div class="w-5 h-0.5 bg-white"></div>
+                <div class="w-5 h-0.5 bg-white"></div>
+                <div class="w-5 h-0.5 bg-white"></div>
+            </div>
+        </div>
+        <!-- only in mobile end-->
+
+
+        <span class="cursor-pointer hidden md:flex gap-5 justify-between items-center text-[#b3b3b3]">
+            <div id="font" class="flex gap-2 font-bold">
+                <p>Premium</p>
+                <p>Support</p>
+                <p>Download</p>
+            </div>
+            <div class="md:flex hidden  w-0.5 h-7 bg-[#b3b3b3]"></div>
+            <div class="flex gap-4 font-semibold text-[15px]">
+                <div class="flex items-center">
+                    <img class="rotate-270 w-5 h-4" src="back.svg" alt="">
+                    <p>Install App</p>
+                </div>
+                <p>Sign up</p>
+            </div>
+            <div
+                class="flex justify-center items-center font-bold bg-white text-black rounded-4xl w-28 h-11 cursor-pointer hover:translate-y-[-2px]">
+                Log in
+            </div>
+        </span>
+
+
+    </nav>
+
+    <!-- main container -->
+    <div class="flex gap-1.5 h-3/4 overflow-y-hidden">
+
+        <!-- //left starts here -->
+
+        <div id="left"
+            class="hidden md:flex flex-col bg-gradient-to-r from-[#59585826] to-[#24232399]  w-[30vw] p-3 rounded-[8px] h-[626px]">
+
+            <!-- creating playlist -->
+            <div id="yourPlayList" class="hidden">
+                <div class="flex justify-between p-1.5 mb-8">
+                    <p>Your Playlist</p>
+
+                    <div id="mobileBack" class="hidden cursor-pointer hover:translate-y-[-2px]">
+                        <img src="back.svg" alt="">
+                    </div>
+
+                    <div id="goBack" class="cursor-pointer hover:translate-y-[-2px]">
+                        <img src="back.svg" alt="">
+                    </div>
+                </div>
+
+                <ul id="list"
+                    class="md:h-[78vh] h-[530px] list-decimal text-[#b3b3b3] bg-[#59585826] p-5 pl-5 font-medium rounded-[8px] flex flex-col gap-3 overflow-y-scroll [scrollbar-width:none] [-ms-overflow-style:none]">
+
+                </ul>
+            </div>
+
+
+
+            <!-- new library -->
+            <div id="hidden">
+                <div class="flex justify-between p-1.5 mb-8">
+                    <p>Your Library</p>
+                    <img src="plus.svg" alt="">
+                </div>
+                <div class="flex flex-col gap-6">
+                    <div class="bg-[#59585826] rounded-[8px] flex flex-col  gap-2.5 h-36 p-5 pb-0">
+                        <p class="font-bold">Create your first playlist</p>
+                        <p class="font-normal text-[14px]">It's easy, we'll help you</p>
+                        <div id="playlistID"
+                            class="mt-1.5 flex justify-center items-center text-[14px] font-bold bg-white text-black rounded-4xl w-32 h-9 cursor-pointer hover:shadow-inner hover:shadow-gray-500 hover:w-[130px] hover:h-[38px] hover:translate-y-[-2px]">
+                            Create playlist</div>
+                    </div>
+                    <div class="bg-[#59585826] rounded-[8px] flex flex-col  gap-2.5 h-36 p-5 pb-0">
+                        <p class="font-bold">Let's find some podcasts to follow</p>
+                        <p class="font-normal text-[14px]">We'll keep you updated on new episodes</p>
+                        <div
+                            class="mt-1.5 flex justify-center items-center text-[14px] font-bold bg-white text-black rounded-4xl w-36 h-9 cursor-pointer hover:shadow-inner hover:shadow-gray-500 hover:w-[146px] hover:h-[38px] hover:translate-y-[-2px]">
+                            Browse podcasts</div>
+                    </div>
+                </div>
+
+                <div class="font-light grid text-[#b3b3b3]  text-[12px] grid-cols-7 mt-18 ml-2 gap-y-2">
+                    <span>Legal</span>
+                    <span class="col-span-2">Safty&Privacy Center</span>
+                    <span class="col-span-2 pl-4.5">Privacy Policy</span>
+                    <span class="col-span-2">Cookies</span>
+                    <span>About Ads</span>
+                    <span class="pl-4.5">Accessibility</span>
+                </div>
+                <div class="text-[14px]  ml-2  mt-2">Cookies</div>
+                <div
+                    class="flex justify-center items-center font-bold text-white bg-black rounded-4xl w-28 h-9 mt-8 ml-5 border-1 border-white">
+                    English
+                </div>
+            </div>
+
+        </div>
+        <!-- //left ends here -->
+
+
+        <!-- //right starts here -->
+        <div id="right"
+            class="h-100vh md:h-[626px] bg-gradient-to-b from-[#302e2ea7] to-[#59585826] to-40% w-screen md:w-[70vw]  overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] pt-3 pl-6 md:rounded-[8px] md:pb-0 pb-14">
+
+            <!-- songs section -->
+            <div id="songSection" class="flex space-x-4 flex-col">
+
+                <!-- songs row1-->
+                <p class="font-bold text-[22px] md:text-3xl pt-6 ">Trending songs</p>
+                <div id="row1"
+                    class="flex flex-nowrap gap-x-1.5 pt-4 md:pt-9 w-screen md:w-[70vw] overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] pr-12 md:pr-14">
+
+                    <!-- single song-card 1-->
+                    <div
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="evelyn.avif" alt="">
+                        </div>
+                        <p class="font-medium pl-2">Evelyn</p>
+                        <p class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</p>
+                    </div>
+
+                    <!-- single song-card 2-->
+                    <div
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="bmw2.jpg" alt="">
+                        </div>
+                        <p class="font-medium pl-2">Evelyn</p>
+                        <h5 class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</h5>
+                    </div>
+
+                    <!-- single song-card 3-->
+                    <div
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="bmw2.jpg" alt="">
+                        </div>
+                        <p class="font-medium pl-2">Evelyn</p>
+                        <p class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</p>
+                    </div>
+
+                    <!-- single song-card 4-->
+                    <div
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="evelyn.avif" alt="">
+                        </div>
+                        <p class="font-medium pl-2">Evelyn</p>
+                        <p class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</p>
+                    </div>
+
+                    <!-- single song-card 5-->
+                    <div
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="evelyn.avif" alt="">
+                        </div>
+                        <p class="font-medium pl-2">Evelyn</p>
+                        <p class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</p>
+                    </div>
+
+                    <!-- single song-card 6-->
+                    <div
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="evelyn.avif" alt="">
+                        </div>
+                        <p class="font-medium pl-2">Evelyn</p>
+                        <p class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</p>
+                    </div>
+
+
+                    <!-- single song-card 7-->
+                    <div
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="bmw2.jpg" alt="">
+                        </div>
+                        <p class="font-medium pl-2">Evelyn</p>
+                        <p class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</p>
+                    </div>
+
+                    <!-- single song-card 8-->
+                    <div
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="bmw2.jpg" alt="">
+                        </div>
+                        <p class="font-medium pl-2">Evelyn</p>
+                        <p class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</p>
+                    </div>
+
+                </div>
+
+
+
+                <!-- playlist row-->
+                <p class="font-bold text-[22px] md:text-3xl pt-6 ">PlayLists</p>
+                <div
+                    class="flex flex-nowrap gap-x-1.5 pt-4 md:pt-9 w-screen md:w-[70vw] overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] pr-12 md:pr-14">
+
+                    <!-- single song-card 1-->
+                    <div id="playlist_no_1"
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="evelyn.avif" alt="">
+                        </div>
+                        <p class="font-semibold text-[20px]  pl-2">Songs</p>
+                    </div>
+
+                    <!-- single song-card 2-->
+                    <div id="playlist_no_2"
+                        class="flex flex-col w-[180px] gap-0.5 shrink-0 hover:bg-gradient-to-b hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px]">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="bmw2.jpg" alt="">
+                        </div>
+                        <p class="font-semibold text-[20px] pl-2">Naats</p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- single audio-play on whole Right-Section -->
+            <div id="oneByone" class="hidden ">
+                <!-- single song-card 1-->
+                <p class=" font-bold text-[22px] md:text-3xl pt-6 ">Library songs</p>
+                <div class="flex justify-center items-center mt-4 mb-4 mr-5 md:mt-0 md:mb-0 md:mr-0">
+                    <img id="main_img"
+                        class="md:w-[34vw] md:h-[62vh] h-96 w-72 object-cover object-bottom-right rounded-lg"
+                        src="evelyn.avif" alt="">
+                </div>
+                <div id="songName" class="pt-2"></div>
+                <div id="songTime">00:00 / 00:00</div>
+            </div>
+            <!-- single song on whole Right-Section ends here-->
+
+
+            <div id="line1" class="w-[98%] h-[0.5px] bg-[#b3b3b3] mt-20"></div>
+
+            <div id="mobile_hidden">
+                <!-- grids -->
+                <div id="grids"
+                    class=" mt-16 ml-2 font-light grid gap-3 md:flex text-[#b3b3b3]  text-[14px] md:gap-x-20 w-[70vw] overflow-hidden">
+
+                    <div class="grid  grid-rows-4">
+                        <p class="font-semibold text-white text-[16px]">Company</p>
+                        <p>About</p>
+                        <p>Jobs</p>
+                        <p>For the Record</p>
+                    </div>
+                    <div class="grid  grid-rows-6">
+                        <p class="font-semibold text-white text-[16px]">Communities</p>
+                        <p>For Artists</p>
+                        <p>Developers</p>
+                        <p>Advertising</p>
+                        <p>Investors</p>
+                        <p>Vendors</p>
+                    </div>
+                    <div class="grid  grid-rows-5">
+                        <p class="font-semibold text-white text-[16px]">Usefull links</p>
+                        <p>Support</p>
+                        <p>Free Mobile App</p>
+                        <p>Popular by Country</p>
+                        <p>Import your Music</p>
+                    </div>
+                    <div class="grid  grid-rows-6">
+                        <p class="font-semibold text-white text-[16px]">Spotify plans</p>
+                        <p>Premium Individual</p>
+                        <p>Premium Duo</p>
+                        <p>Premium FamilyP</p>
+                        <p>Premium Student</p>
+                        <p>Spotify Free</p>
+                    </div>
+                </div>
+
+                <div id="line2" class="w-[98%] h-[0.5px] mt-14 bg-[#b3b3b3] "></div>
+
+
+                <!-- hidden in md screen -->
+                <div class="font-light md:hidden grid text-[#b3b3b3]  text-[12px] grid-cols-5 mt-18 ml-2 gap-y-2">
+                    <span>Legal</span>
+                    <span class="col-span-2">Safty&Privacy Center</span>
+                    <span class="col-span-2 pl-4.5">Privacy Policy</span>
+                    <span>Cookies</span>
+                    <span>About Ads</span>
+                    <span class="pl-4.5">Accessibility</span>
+                </div>
+
+                <p id="copyRight" class="h-9 md:h-16 flex items-center ml-2 font-light text-[#b3b3b3]  text-[14px]">
+                    ©
+                    2025
+                    Spotify AB</p>
+
+
+                <!-- hidden in md screen -->
+                <div
+                    class=" md:hidden flex justify-center items-center font-extralight text-[14px] text-white bg-black rounded-4xl w-24 h-6 ml-2.5 border-1 border-white">
+                    English
+                </div>
+
+            </div>
+            <!-- play bar starts here -->
+    <div id="playBar"
+        class="hidden md:absolute md:w-[68vw] w-[99vw] h-16 md:bottom-1 md:right-3 bg-gradient-to-b from-[#302e2e] to-[#59585826] to-40% rounded-[8px] cursor-pointer mt-[35px] ml-[-22px]">
+        <div id="buttons" class="h-16 gap-8 flex justify-center items-center">
+            <img id="previuos" src="previous.svg" alt=""><img id="pause" src="pause.svg" alt=""><img id="next"
+                src="next.svg" alt="">
+        </div>
+        <div id="playLine" class="md:w-[67vw] w-[96vw] bg-white h-1 relative bottom-3 left-1.5">
+            <div id="circle" class="w-3.5 h-3.5 rounded-2xl bg-white relative bottom-1.5"></div>
+        </div>
+    </div>
+        </div>
+
+    </div>
+
+
+    
+
+    <div id="banner"
+        class="hidden md:flex justify-between items-center h-[70px] bg-gradient-to-r from-[#b93db2ed] to-sky-400 pl-3 pr-6">
+        <div class="flex flex-col">
+            <p class="text-[14px] font-bold">Preview of Spotify</p>
+            <p class="text-[16px] font-medium">Sign up to get unlimited songs and podcasts with occasional ads. No
+                credit card needed.</p>
+        </div>
+        <div class="flex justify-center items-center font-bold bg-white text-black rounded-4xl w-36 h-12">
+            Sign up free
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
