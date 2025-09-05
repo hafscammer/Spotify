@@ -90,12 +90,12 @@ document.querySelector("#volume").addEventListener("change", (e) => {
     currentSong.volume = (e.target.value) / 100
 })
 
-document.querySelector("#volID").addEventListener("click", (e)=>{
-    if(e.target.src.includes("volume.svg")){
+document.querySelector("#volID").addEventListener("click", (e) => {
+    if (e.target.src.includes("volume.svg")) {
         e.target.src = e.target.src.replace("volume.svg", "mute.svg")
         currentSong.volume = 0
     }
-    else{
+    else {
         e.target.src = e.target.src.replace("mute.svg", "volume.svg")
         currentSong.volume = 0.5
     }
@@ -110,7 +110,7 @@ let currfolder;
 
 async function fetchSongs(folder) {
     currfolder = folder;
-    console.log(currfolder)
+    // console.log(currfolder)
     let a = await fetch(`http://127.0.0.1:5501/${folder}`)
     let response = await a.text()
     let div = document.createElement("div")
@@ -176,7 +176,7 @@ async function playLists() {
     let cardContainer = document.querySelector("#cardContainer")
     let array = Array.from(anchors)
     let newfolder
-    
+
     for (let index = 0; index < array.length; index++) {
         const e = array[index];
         if (e.href.includes("/playLists/")) {
@@ -213,7 +213,8 @@ async function playLists() {
             document.getElementById("copyRight").classList.add("hidden");
             document.getElementById("banner").classList.add("md:hidden");
             document.getElementById("playBar").classList.remove("hidden");
-            document.getElementById("main_img").src = "evelyn.avif"
+            // document.getElementById("main_img").src = `/${currfolder}/cover.jpg`
+            // console.log(newfolder)
             document.getElementById("mobile_hidden").classList.add("hidden");
         });
     });
@@ -225,6 +226,8 @@ async function playLists() {
             // playLists/${item.currentTarget.dataset.folder
         })
     })
+
+    // document.querySelector("#main_img").src = `/playLists/${newfolder}/cover.jpg`
 }
 
 
