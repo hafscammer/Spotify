@@ -49,6 +49,11 @@
             font-size: 12px;
             gap: 6px;
         }
+
+        .card{
+            @apply
+        }
+
     </style>
 </head>
 
@@ -235,8 +240,8 @@
                     class="flex flex-nowrap gap-x-1.5 pt-4 md:pt-9 w-screen md:w-[70vw] overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] pr-12 md:pr-14">
 
                     <!-- single song-card 1-->
-                    <div id="playlist_no_1"
-                        class="flex flex-col w-[180px] gap-0.5 shrink-0 md:bg-none
+                    <div id="playlist_no_1" data-folder="songs"
+                        class="card flex flex-col w-[180px] gap-0.5 shrink-0 md:bg-none
                         hover:bg-gradient-to-b  hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px] cursor-default bg-gradient-to-b from-[#302e2ea7] to-[#59585826] to-80%">
 
                         <div class="flex w-[180px] h-[180px] justify-center items-center">
@@ -246,8 +251,8 @@
                     </div>
 
                     <!-- single song-card 2-->
-                    <div id="playlist_no_2"
-                        class="flex flex-col w-[180px] gap-0.5 shrink-0 md:bg-none
+                    <div id="playlist_no_2" data-folder="naats"
+                        class="card flex flex-col w-[180px] gap-0.5 shrink-0 md:bg-none
                         hover:bg-gradient-to-b  hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px] cursor-default bg-gradient-to-b from-[#302e2ea7] to-[#59585826] to-80%">
 
                         <div class="flex w-[180px] h-[180px] justify-center items-center">

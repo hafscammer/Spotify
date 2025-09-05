@@ -146,41 +146,28 @@ document.querySelector("#volume").addEventListener("change", (e) => {
 
 
 let currentSong = new Audio();
-let songs
+let songs;
+let currfolder;
 
 
-async function fetchSongs() {
-    let a = await fetch("./songs")
+async function fetchSongs(folder) {
+    currfolder = folder;
+    let a = await fetch(`http://127.0.0.1:5501/${folder}`)
     let response = await a.text()
     let div = document.createElement("div")
     div.innerHTML = response;
     let as = div.getElementsByTagName("a")
-    let songs = []
+    songs = []
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
         if (element.href.endsWith(".mp4")) {
-            songs.push(element.href.split("/songs/")[1])
+            songs.push(element.href.split(`/${folder}/`)[1])
         }
     }
-    return songs
-}
-const audioPlay = (track, pause = false) => {
-    currentSong.src = /songs/ + track
-    if (!false) {
-        currentSong.play()
-        play.src = "play.svg"
-    }
-    document.querySelector("#songName").innerHTML = decodeURI(track);
-    document.querySelector("#songTime").innerHTML = `00:00 / 00:00`
-}
 
-
-async function main() {
-    songs = await fetchSongs()
-
-    audioPlay(songs[0], true)
 
     let songUL = document.querySelector("#yourPlayList").getElementsByTagName("ul")[0]
+    songUL.innerHTML = ""
     for (const song of songs) {
         songUL.innerHTML = songUL.innerHTML +
             `<li class="hover:translate-y-[-2px]">
@@ -206,6 +193,25 @@ async function main() {
             play.src = "pause.svg"
         })
     })
+}
+
+const audioPlay = (track, pause = false) => {
+    currentSong.src = `/${currfolder}/` + track
+    if (!false) {
+        currentSong.play()
+        play.src = "play.svg"
+    }
+    document.querySelector("#songName").innerHTML = decodeURI(track);
+    document.querySelector("#songTime").innerHTML = `00:00 / 00:00`
+}
+
+
+async function main() {
+    await fetchSongs(`naats`)
+    audioPlay(songs[0], true)
+
+    
+    currentSong.pause()
 
     document.querySelector("#goBack").addEventListener("click", (e) => {
         currentSong.pause()
@@ -213,6 +219,7 @@ async function main() {
     })
     document.querySelector("#playlistID").addEventListener("click", (e) => {
         currentSong.play()
+        // console.log(document.querySelector("#sName").getElementsByTagName("p"))
         play.src = "pause.svg"
     })
 
@@ -250,6 +257,12 @@ document.querySelector("#playLine").addEventListener("click", (e) => {
 
 })
 
+//load individual folder when playlist folder is clicked
+Array.from(document.getElementsByClassName("card")).forEach(e=>{
+    e.addEventListener("click", async item=>{
+            songs = await fetchSongs(`${item.currentTarget.dataset.folder}`)
+    })
+})
 
 
 main()
