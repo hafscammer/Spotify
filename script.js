@@ -90,6 +90,17 @@ document.querySelector("#volume").addEventListener("change", (e) => {
     currentSong.volume = (e.target.value) / 100
 })
 
+document.querySelector("#volID").addEventListener("click", (e)=>{
+    if(e.target.src.includes("volume.svg")){
+        e.target.src = e.target.src.replace("volume.svg", "mute.svg")
+        currentSong.volume = 0
+    }
+    else{
+        e.target.src = e.target.src.replace("mute.svg", "volume.svg")
+        currentSong.volume = 0.5
+    }
+})
+
 
 
 let currentSong = new Audio();
