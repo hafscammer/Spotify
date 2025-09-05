@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="output.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="output.css">
     <title>Spotify- Web Player: Music for everyone</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=CircularSp-Grek:ital,wght@0,200..800;1,200..800&family=Oswald:wght@200..700&display=swap');
@@ -79,7 +79,8 @@
 
         <!-- only in mobile start-->
         <div class="md:hidden flex justify-between items-center gap-x-5">
-            <div id="mobileBack" class=" flex justify-center items-center font-bold bg-white text-black rounded-4xl w-24 h-10 cursor-default">
+            <div id="mobileBack"
+                class=" flex justify-center items-center font-bold bg-white text-black rounded-4xl w-24 h-10 cursor-default">
                 Home
             </div>
             <div id="hamburger" class="flex flex-col gap-y-1.5 space-x-6">
@@ -126,8 +127,9 @@
             <div id="yourPlayList" class="hidden">
                 <div class="flex justify-between p-1.5 mb-8">
                     <p>Your Playlist</p>
-                    
-                    <div id="back180"  class="rotate-180 transition-transform duration-700 transform hidden cursor-pointer hover:translate-y-[-2px]">
+
+                    <div id="back180"
+                        class="rotate-180 transition-transform duration-700 transform hidden cursor-pointer hover:translate-y-[-2px]">
                         <img src="back.svg" alt="">
                     </div>
 
@@ -221,7 +223,7 @@
                         <p class="font-medium pl-2">Play</p>
                         <h5 class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</h5>
                     </div>
-                    
+
 
                 </div>
 
@@ -340,26 +342,31 @@
 
             </div>
             <!-- play bar starts here -->
-    <div id="playBar"
-        class="hidden md:absolute md:w-[68vw] w-[99vw] h-16 md:bottom-1 md:right-3 bg-gradient-to-b from-[#302e2e] to-[#59585826] to-40% rounded-[8px] cursor-pointer mt-[35px] ml-[-22px]">
-        <div id="buttons" class="h-16 gap-8 flex justify-center items-center">
-            <img id="previuos" src="previous.svg" alt=""><img id="pause" src="pause.svg" alt=""><img id="next"
-                src="next.svg" alt="">
-                <div class="">
-            <input type="range" name="vol" id="volume">
-        </div>
+            <div id="playBar"
+                class="hidden md:absolute md:w-[68vw] w-[99vw] h-16 md:bottom-1 md:right-3 bg-gradient-to-b from-[#302e2e] to-[#59585826] to-40% rounded-[8px] cursor-pointer mt-[35px] ml-[-22px]">
+                <div class="h-16 gap-8 flex items-center">
+                    <div class="w-0.5"></div>
+                    <div id="buttons" class="h-16 gap-8 flex justify-center items-center relative md:left-[40%] left-[28%]">
+                        <img id="previuos" src="previous.svg" alt=""><img id="pause" src="pause.svg" alt=""><img id="next" src="next.svg" alt="">
+                    </div>
+
+                    <div class="h-16 gap-2 flex justify-evenly items-center overflow-hidden relative md:left-[62%] left-[30%]">
+                        <img src="volume.svg" alt="">
+                        <input class="cursor-pointer md:w-24 w-[70px] h-1.5 accent-white"
+                         type="range" name="vol" id="volume">
+                    </div>
+                </div>
+                <div id="playLine" class="md:w-[67vw] w-[96vw] bg-white h-1 relative bottom-3 left-1.5">
+                    <div id="circle" class="w-3.5 h-3.5 rounded-2xl bg-white relative bottom-1.5"></div>
+                </div>
+
+            </div>
         </div>
 
-        <div id="playLine" class="md:w-[67vw] w-[96vw] bg-white h-1 relative bottom-3 left-1.5">
-            <div id="circle" class="w-3.5 h-3.5 rounded-2xl bg-white relative bottom-1.5"></div>
-        </div>
     </div>
-        </div>
-
-    </div>
 
 
-    
+
 
     <div id="banner"
         class="hidden md:flex justify-between items-center h-[70px] bg-gradient-to-r from-[#b93db2ed] to-sky-400 pl-3 pr-6">

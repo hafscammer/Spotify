@@ -2,6 +2,7 @@
 // to show your library
 document.querySelector("#playlistID").addEventListener("click", (e) => {
     document.getElementById("left").classList.add("md:h-[91vh]");
+    document.getElementById("left").classList.remove("md:h-[626px]");
     document.getElementById("hidden").classList.add("hidden");
     document.getElementById("yourPlayList").classList.remove("hidden");
     document.getElementById("songSection").classList.add("hidden");
@@ -17,6 +18,7 @@ document.querySelector("#playlistID").addEventListener("click", (e) => {
 // to go back
 document.querySelector("#goBack").addEventListener("click", (e) => {
     document.getElementById("left").classList.remove("md:h-[91vh]");
+    document.getElementById("left").classList.add("md:h-[626px]");
     document.getElementById("left").classList.remove("hidden", "md:flex");
     document.getElementById("hidden").classList.remove("hidden");
     document.getElementById("oneByone").classList.add("hidden");
@@ -33,43 +35,45 @@ document.querySelector("#goBack").addEventListener("click", (e) => {
 
 let translate
 // show details of first playlist
-    document.querySelector("#playlist_no_1").addEventListener("click", (e) => {
-        document.getElementById("left").classList.add("md:h-[91vh]");
-        document.getElementById("hidden").classList.add("hidden");
-        document.getElementById("yourPlayList").classList.remove("hidden");
-        document.getElementById("songSection").classList.add("hidden");
-        document.getElementById("oneByone").classList.remove("hidden");
-        document.getElementById("line1").classList.add("hidden");
-        document.getElementById("line2").classList.add("hidden");
-        document.getElementById("grids").classList.add("md:hidden");
-        document.getElementById("copyRight").classList.add("hidden");
-        document.getElementById("banner").classList.add("md:hidden");
-        document.getElementById("playBar").classList.remove("hidden");
-        document.getElementById("main_img").src = "evelyn.avif"
-        document.getElementById("mobile_hidden").classList.add("hidden");
-        translate = 1
-    });
+document.querySelector("#playlist_no_1").addEventListener("click", (e) => {
+    document.getElementById("left").classList.add("md:h-[91vh]");
+    document.getElementById("left").classList.remove("md:h-[626px]");
+    document.getElementById("hidden").classList.add("hidden");
+    document.getElementById("yourPlayList").classList.remove("hidden");
+    document.getElementById("songSection").classList.add("hidden");
+    document.getElementById("oneByone").classList.remove("hidden");
+    document.getElementById("line1").classList.add("hidden");
+    document.getElementById("line2").classList.add("hidden");
+    document.getElementById("grids").classList.add("md:hidden");
+    document.getElementById("copyRight").classList.add("hidden");
+    document.getElementById("banner").classList.add("md:hidden");
+    document.getElementById("playBar").classList.remove("hidden");
+    document.getElementById("main_img").src = "evelyn.avif"
+    document.getElementById("mobile_hidden").classList.add("hidden");
+    translate = 1
+});
 
 
 
 // show details of second playlist
-    document.querySelector("#playlist_no_2").addEventListener("click", (e) => {
-        document.getElementById("left").classList.add("md:h-[91vh]");
-        document.getElementById("left").classList.add("h-screen");
-        document.getElementById("hidden").classList.add("hidden");
-        document.getElementById("yourPlayList").classList.remove("hidden");
-        document.getElementById("songSection").classList.add("hidden");
-        document.getElementById("oneByone").classList.remove("hidden");
-        document.getElementById("line1").classList.add("hidden");
-        document.getElementById("line2").classList.add("hidden");
-        document.getElementById("grids").classList.add("md:hidden");
-        document.getElementById("copyRight").classList.add("hidden");
-        document.getElementById("banner").classList.add("md:hidden");
-        document.getElementById("playBar").classList.remove("hidden");
-        document.getElementById("main_img").src = "bmw2.jpg"
-        document.getElementById("mobile_hidden").classList.add("hidden");
-        translate = 2
-    });
+document.querySelector("#playlist_no_2").addEventListener("click", (e) => {
+    document.getElementById("left").classList.add("md:h-[91vh]");
+    document.getElementById("left").classList.remove("md:h-[626px]");
+    document.getElementById("left").classList.add("h-screen");
+    document.getElementById("hidden").classList.add("hidden");
+    document.getElementById("yourPlayList").classList.remove("hidden");
+    document.getElementById("songSection").classList.add("hidden");
+    document.getElementById("oneByone").classList.remove("hidden");
+    document.getElementById("line1").classList.add("hidden");
+    document.getElementById("line2").classList.add("hidden");
+    document.getElementById("grids").classList.add("md:hidden");
+    document.getElementById("copyRight").classList.add("hidden");
+    document.getElementById("banner").classList.add("md:hidden");
+    document.getElementById("playBar").classList.remove("hidden");
+    document.getElementById("main_img").src = "bmw2.jpg"
+    document.getElementById("mobile_hidden").classList.add("hidden");
+    translate = 2
+});
 
 
 
@@ -102,7 +106,6 @@ document.querySelector("#mobileBack").addEventListener("click", () => {
     document.querySelector("#goBack").classList.remove("hidden")
     document.querySelector("#oneByone").classList.add("hidden")
     // document.querySelector("#mobileBack").classList.add("hidden")
-    // document.querySelector("#left").classList.remove("translate-x-[100vw]")
 })
 
 
@@ -125,14 +128,19 @@ document.querySelector("#back180").addEventListener("click", () => {
     if (translate == 1) {
         document.getElementById("main_img").src = "evelyn.avif"
         translate = 0
-            console.log(translate)
+        console.log(translate)
 
     } else if (translate == 2) {
         document.getElementById("main_img").src = "bmw2.jpg"
         translate = 0
-            console.log(translate)
+        console.log(translate)
 
     }
+})
+
+
+document.querySelector("#volume").addEventListener("change", (e) => {
+    currentSong.volume = (e.target.value) / 100
 })
 
 
@@ -249,18 +257,18 @@ main()
 
 let previous = document.querySelector("#previuos")
 // to play previous song
-previous.addEventListener("click", ()=>{
+previous.addEventListener("click", () => {
     let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
-    if((index-1) >= 0 ){
-        audioPlay(songs[index-1])
+    if ((index - 1) >= 0) {
+        audioPlay(songs[index - 1])
     }
 })
 
 // to play next song
 let next = document.querySelector("#next")
-next.addEventListener("click", ()=>{
+next.addEventListener("click", () => {
     let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
-    if((index+1) > length ){
-        audioPlay(songs[index+1])
+    if ((index + 1) > length) {
+        audioPlay(songs[index + 1])
     }
 })
