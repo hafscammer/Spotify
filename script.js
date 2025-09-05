@@ -13,6 +13,7 @@ document.querySelector("#playlistID").addEventListener("click", (e) => {
     document.getElementById("copyRight").classList.add("hidden");
     document.getElementById("banner").classList.add("md:hidden");
     document.getElementById("playBar").classList.remove("hidden");
+    document.getElementById("main_img").src = "music.svg"
 });
 
 // to go back
@@ -33,52 +34,9 @@ document.querySelector("#goBack").addEventListener("click", (e) => {
     document.getElementById("mobile_hidden").classList.remove("hidden");
 })
 
-let translate
-// show details of first playlist
-document.querySelector("#playlist_no_1").addEventListener("click", (e) => {
-    document.getElementById("left").classList.add("md:h-[91vh]");
-    document.getElementById("left").classList.remove("md:h-[626px]");
-    document.getElementById("hidden").classList.add("hidden");
-    document.getElementById("yourPlayList").classList.remove("hidden");
-    document.getElementById("songSection").classList.add("hidden");
-    document.getElementById("oneByone").classList.remove("hidden");
-    document.getElementById("line1").classList.add("hidden");
-    document.getElementById("line2").classList.add("hidden");
-    document.getElementById("grids").classList.add("md:hidden");
-    document.getElementById("copyRight").classList.add("hidden");
-    document.getElementById("banner").classList.add("md:hidden");
-    document.getElementById("playBar").classList.remove("hidden");
-    document.getElementById("main_img").src = "evelyn.avif"
-    document.getElementById("mobile_hidden").classList.add("hidden");
-    translate = 1
-});
-
-
-
-// show details of second playlist
-document.querySelector("#playlist_no_2").addEventListener("click", (e) => {
-    document.getElementById("left").classList.add("md:h-[91vh]");
-    document.getElementById("left").classList.remove("md:h-[626px]");
-    document.getElementById("left").classList.add("h-screen");
-    document.getElementById("hidden").classList.add("hidden");
-    document.getElementById("yourPlayList").classList.remove("hidden");
-    document.getElementById("songSection").classList.add("hidden");
-    document.getElementById("oneByone").classList.remove("hidden");
-    document.getElementById("line1").classList.add("hidden");
-    document.getElementById("line2").classList.add("hidden");
-    document.getElementById("grids").classList.add("md:hidden");
-    document.getElementById("copyRight").classList.add("hidden");
-    document.getElementById("banner").classList.add("md:hidden");
-    document.getElementById("playBar").classList.remove("hidden");
-    document.getElementById("main_img").src = "bmw2.jpg"
-    document.getElementById("mobile_hidden").classList.add("hidden");
-    translate = 2
-});
-
 
 
 document.querySelector("#hamburger").addEventListener("click", () => {
-    console.log("its clicked")
     document.getElementById("yourPlayList").classList.add("h-screen");
     document.getElementById("left").classList.add("h-[100vh]");
     document.getElementById("hidden").classList.add("hidden");
@@ -125,20 +83,9 @@ document.querySelector("#back180").addEventListener("click", () => {
     document.getElementById("banner").classList.add("md:hidden");
     document.getElementById("playBar").classList.remove("hidden");
     document.getElementById("mobile_hidden").classList.add("hidden");
-    if (translate == 1) {
-        document.getElementById("main_img").src = "evelyn.avif"
-        translate = 0
-        console.log(translate)
-
-    } else if (translate == 2) {
-        document.getElementById("main_img").src = "bmw2.jpg"
-        translate = 0
-        console.log(translate)
-
-    }
 })
 
-
+//volume up/down
 document.querySelector("#volume").addEventListener("change", (e) => {
     currentSong.volume = (e.target.value) / 100
 })
@@ -152,6 +99,7 @@ let currfolder;
 
 async function fetchSongs(folder) {
     currfolder = folder;
+    console.log(currfolder)
     let a = await fetch(`http://127.0.0.1:5501/${folder}`)
     let response = await a.text()
     let div = document.createElement("div")
@@ -195,6 +143,7 @@ async function fetchSongs(folder) {
     })
 }
 
+let track
 const audioPlay = (track, pause = false) => {
     currentSong.src = `/${currfolder}/` + track
     if (!false) {
@@ -206,21 +155,82 @@ const audioPlay = (track, pause = false) => {
 }
 
 
-async function main() {
-    await fetchSongs(`naats`)
-    audioPlay(songs[0], true)
 
+async function playLists() {
+    let a = await fetch(`http://127.0.0.1:5501/playLists/`)
+    let response = await a.text()
+    let div = document.createElement("div")
+    div.innerHTML = response;
+    let anchors = div.getElementsByTagName("a")
+    let cardContainer = document.querySelector("#cardContainer")
+    let array = Array.from(anchors)
+    let newfolder
     
+    for (let index = 0; index < array.length; index++) {
+        const e = array[index];
+        if (e.href.includes("/playLists/")) {
+            newfolder = e.href.split("/").splice(-2)[1]
+            //geting data of folders
+            let a = await fetch(`http://127.0.0.1:5501/playLists/${newfolder}/info.json`)
+            let response = await a.json()
+            cardContainer.innerHTML = cardContainer.innerHTML +
+                `<div data-folder="${newfolder}"
+                        class="playlist_no_1 card flex flex-col w-[180px] gap-0.5 shrink-0 md:bg-none
+                        hover:bg-gradient-to-b  hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px] cursor-default bg-gradient-to-b from-[#302e2ea7] to-[#59585826] to-80%">
+
+                        <div class="flex w-[180px] h-[180px] justify-center items-center">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="/playLists/${newfolder}/cover.jpg" alt="">
+                        </div>
+                        <p class="font-semibold text-[26px]  pl-2">${response.title}</p>
+                        <p class="font-normal text-[12px]  pl-2">${response.discription}</p>
+                    </div>`
+        }
+    }
+
+    // show details of first playlist
+    document.querySelectorAll(".playlist_no_1").forEach((el) => {
+        el.addEventListener("click", (e) => {
+            document.getElementById("left").classList.add("md:h-[91vh]");
+            document.getElementById("left").classList.remove("md:h-[626px]");
+            document.getElementById("hidden").classList.add("hidden");
+            document.getElementById("yourPlayList").classList.remove("hidden");
+            document.getElementById("songSection").classList.add("hidden");
+            document.getElementById("oneByone").classList.remove("hidden");
+            document.getElementById("line1").classList.add("hidden");
+            document.getElementById("line2").classList.add("hidden");
+            document.getElementById("grids").classList.add("md:hidden");
+            document.getElementById("copyRight").classList.add("hidden");
+            document.getElementById("banner").classList.add("md:hidden");
+            document.getElementById("playBar").classList.remove("hidden");
+            document.getElementById("main_img").src = "evelyn.avif"
+            document.getElementById("mobile_hidden").classList.add("hidden");
+        });
+    });
+
+    //load individual folder when playlist folder is clicked
+    Array.from(document.getElementsByClassName("card")).forEach(e => {
+        e.addEventListener("click", async item => {
+            songs = await fetchSongs(`playLists/${item.currentTarget.dataset.folder}`)
+            // playLists/${item.currentTarget.dataset.folder
+        })
+    })
+}
+
+
+
+async function main() {
+    await fetchSongs(`playLists/naats`)
+    audioPlay(songs[0], true)
     currentSong.pause()
+
+    //to add multiple folders
+    playLists()
+
+
 
     document.querySelector("#goBack").addEventListener("click", (e) => {
         currentSong.pause()
         play.src = "play.svg"
-    })
-    document.querySelector("#playlistID").addEventListener("click", (e) => {
-        currentSong.play()
-        // console.log(document.querySelector("#sName").getElementsByTagName("p"))
-        play.src = "pause.svg"
     })
 
 }
@@ -252,17 +262,9 @@ document.querySelector("#playLine").addEventListener("click", (e) => {
     let seek = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
     document.querySelector("#circle").style.left = seek + "%";
     currentSong.currentTime = (currentSong.duration * seek) / 100;
-    console.log(currentSong.duration)
-    console.log(seek)
-
 })
 
-//load individual folder when playlist folder is clicked
-Array.from(document.getElementsByClassName("card")).forEach(e=>{
-    e.addEventListener("click", async item=>{
-            songs = await fetchSongs(`${item.currentTarget.dataset.folder}`)
-    })
-})
+
 
 
 main()
@@ -285,3 +287,5 @@ next.addEventListener("click", () => {
         audioPlay(songs[index + 1])
     }
 })
+
+
