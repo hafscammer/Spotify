@@ -152,6 +152,7 @@ async function fetchSongs(folder) {
             play.src = "pause.svg"
         })
     })
+    return songs
 }
 
 let track
@@ -213,8 +214,6 @@ async function playLists() {
             document.getElementById("copyRight").classList.add("hidden");
             document.getElementById("banner").classList.add("md:hidden");
             document.getElementById("playBar").classList.remove("hidden");
-            // document.getElementById("main_img").src = `/${currfolder}/cover.jpg`
-            // console.log(newfolder)
             document.getElementById("mobile_hidden").classList.add("hidden");
         });
     });
@@ -223,11 +222,10 @@ async function playLists() {
     Array.from(document.getElementsByClassName("card")).forEach(e => {
         e.addEventListener("click", async item => {
             songs = await fetchSongs(`playLists/${item.currentTarget.dataset.folder}`)
-            // playLists/${item.currentTarget.dataset.folder
+            document.getElementById("main_img").src = `/${currfolder}/cover.jpg`
+            audioPlay(songs[0])
         })
     })
-
-    // document.querySelector("#main_img").src = `/playLists/${newfolder}/cover.jpg`
 }
 
 
