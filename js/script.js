@@ -13,7 +13,7 @@ document.querySelector("#playlistID").addEventListener("click", (e) => {
     document.getElementById("copyRight").classList.add("hidden");
     document.getElementById("banner").classList.add("md:hidden");
     document.getElementById("playBar").classList.remove("hidden");
-    document.getElementById("main_img").src = "music.svg"
+    document.getElementById("main_img").src = "img/music.svg"
 });
 
 // to go back
@@ -91,12 +91,12 @@ document.querySelector("#volume").addEventListener("change", (e) => {
 })
 
 document.querySelector("#volID").addEventListener("click", (e) => {
-    if (e.target.src.includes("volume.svg")) {
-        e.target.src = e.target.src.replace("volume.svg", "mute.svg")
+    if (e.target.src.includes("img/volume.svg")) {
+        e.target.src = e.target.src.replace("img/volume.svg", "img/mute.svg")
         currentSong.volume = 0
     }
     else {
-        e.target.src = e.target.src.replace("mute.svg", "volume.svg")
+        e.target.src = e.target.src.replace("img/mute.svg", "img/volume.svg")
         currentSong.volume = 0.5
     }
 })
@@ -110,7 +110,6 @@ let currfolder;
 
 async function fetchSongs(folder) {
     currfolder = folder;
-    // console.log(currfolder)
     let a = await fetch(`http://127.0.0.1:5501/${folder}`)
     let response = await a.text()
     let div = document.createElement("div")
@@ -131,36 +130,36 @@ async function fetchSongs(folder) {
         songUL.innerHTML = songUL.innerHTML +
             `<li class="hover:translate-y-[-2px]">
                         <div id="sName">
-                            <img src="music.svg" alt="">
+                            <img src="img/music.svg" alt="">
                             <p>${song.replaceAll("%20", " ")}</p>
                         </div>
                         <div id="play">
                             <p id="play">Play Now</p>
-                            <img src="play.svg" alt="">
+                            <img src="img/play.svg" alt="">
                         </div>
 
                     </li>`;
 
     }
 
-
     //play the audio
     Array.from(document.querySelector("#list").getElementsByTagName("li")).forEach(e => {
         e.addEventListener("click", element => {
             console.log(e.querySelector("#sName").children[1].innerHTML)
             audioPlay(e.querySelector("#sName").children[1].innerHTML.trim())
-            play.src = "pause.svg"
+            play.src = "img/pause.svg"
         })
     })
     return songs
 }
+
 
 let track
 const audioPlay = (track, pause = false) => {
     currentSong.src = `/${currfolder}/` + track
     if (!false) {
         currentSong.play()
-        play.src = "play.svg"
+        play.src = "img/play.svg"
     }
     document.querySelector("#songName").innerHTML = decodeURI(track);
     document.querySelector("#songTime").innerHTML = `00:00 / 00:00`
@@ -224,6 +223,7 @@ async function playLists() {
             songs = await fetchSongs(`playLists/${item.currentTarget.dataset.folder}`)
             document.getElementById("main_img").src = `/${currfolder}/cover.jpg`
             audioPlay(songs[0])
+            play.src = "img/pause.svg"
         })
     })
 }
@@ -242,7 +242,7 @@ async function main() {
 
     document.querySelector("#goBack").addEventListener("click", (e) => {
         currentSong.pause()
-        play.src = "play.svg"
+        play.src = "img/play.svg"
     })
 
 }
@@ -253,11 +253,11 @@ let play = document.querySelector("#buttons").children[1]
 play.addEventListener("click", () => {
     if (currentSong.paused) {
         currentSong.play()
-        play.src = "pause.svg"
+        play.src = "img/pause.svg"
     }
     else {
         currentSong.pause()
-        play.src = "play.svg"
+        play.src = "img/play.svg"
     }
 })
 
@@ -288,6 +288,7 @@ previous.addEventListener("click", () => {
     let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
     if ((index - 1) >= 0) {
         audioPlay(songs[index - 1])
+        play.src = "img/pause.svg"
     }
 })
 
@@ -297,7 +298,9 @@ next.addEventListener("click", () => {
     let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
     if ((index + 1) > length) {
         audioPlay(songs[index + 1])
+        play.src = "img/pause.svg"
     }
 })
+
 
 

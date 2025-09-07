@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="output.css">
     <title>Spotify- Web Player: Music for everyone</title>
     <style>
@@ -68,21 +68,21 @@
     <nav class="flex justify-between items-center h-16">
         <span class="flex  ml-6 items-center gap-2">
             <div class="flex justify-center items-center gap-1">
-                <img style="width: 32px; height: 32px;" src="logo.svg" alt="">
+                <img style="width: 32px; height: 32px;" src="img/logo.svg" alt="">
                 <p class="md:hidden text-xl">Spotify</p>
             </div>
             <div class="bg-[#353232e6] w-12 h-12 rounded-4xl hidden md:flex items-center justify-center ml-3.5">
-                <img style="width: 26px; height: 26px;" src="home.svg" alt="">
+                <img style="width: 26px; height: 26px;" src="img/home.svg" alt="">
             </div>
             <div
                 class="hidden md:flex items-center justify-between bg-[#353232e6] w-[480px] h-12 rounded-3xl focus:outline-2 cursor-auto">
                 <span class="flex gap-3 ml-3 font-medium">
-                    <img style="width: 26px; height: 26px;" src="search.svg" alt="">
+                    <img style="width: 26px; height: 26px;" src="img/search.svg" alt="">
                     <input type="text" placeholder="What do you want to play?" class=" w-52 focus:outline-none" />
                 </span>
                 <span class="flex gap-3 mr-3">
                     <div class="w-0.5 h-7 bg-[#b3b3b3] "></div>
-                    <img style="width: 26px; height: 26px;" src="browse.svg" alt="">
+                    <img style="width: 26px; height: 26px;" src="img/browse.svg" alt="">
                 </span>
             </div>
         </span>
@@ -111,7 +111,7 @@
             <div class="md:flex hidden  w-0.5 h-7 bg-[#b3b3b3]"></div>
             <div class="flex gap-4 font-semibold text-[15px]">
                 <div class="flex items-center">
-                    <img class="rotate-270 w-5 h-4" src="back.svg" alt="">
+                    <img class="rotate-270 w-5 h-4" src="img/back.svg" alt="">
                     <p>Install App</p>
                 </div>
                 <p>Sign up</p>
@@ -140,11 +140,11 @@
 
                     <div id="back180"
                         class="rotate-180 transition-transform duration-700 transform hidden cursor-pointer hover:translate-y-[-2px]">
-                        <img src="back.svg" alt="">
+                        <img src="img/back.svg" alt="">
                     </div>
 
                     <div id="goBack" class="cursor-pointer hover:translate-y-[-2px]">
-                        <img src="back.svg" alt="">
+                        <img src="img/back.svg" alt="">
                     </div>
                 </div>
 
@@ -160,7 +160,7 @@
             <div id="hidden">
                 <div class="flex justify-between p-1.5 mb-8">
                     <p>Your Library</p>
-                    <img src="plus.svg" alt="">
+                    <img src="img/plus.svg" alt="">
                 </div>
                 <div class="flex flex-col gap-6">
                     <div class="bg-[#59585826] rounded-[8px] flex flex-col  gap-2.5 h-36 p-5 pb-0">
@@ -210,25 +210,14 @@
                 <div id="row1"
                     class="flex flex-nowrap gap-x-1.5 pt-4 md:pt-9 w-screen md:w-[70vw] overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] pr-12 md:pr-14">
 
+
                     <!-- single song-card 1-->
                     <div
                         class="flex flex-col w-[180px] gap-0.5 shrink-0 md:bg-none
                         hover:bg-gradient-to-b  hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px] cursor-default bg-gradient-to-b from-[#302e2ea7] to-[#59585826] to-80%">
 
                         <div class="flex w-[180px] h-[180px] justify-center items-center">
-                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="evelyn.avif" alt="">
-                        </div>
-                        <p class="font-medium pl-2">Play</p>
-                        <p class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</p>
-                    </div>
-
-                    <!-- single song-card 2-->
-                    <div
-                        class="flex flex-col w-[180px] gap-0.5 shrink-0 md:bg-none
-                        hover:bg-gradient-to-b  hover:from-[#100f0f0e] hover:to-[#1a1919] hover:to-50% pb-5 rounded-[6px] cursor-default bg-gradient-to-b from-[#302e2ea7] to-[#59585826] to-80%">
-
-                        <div class="flex w-[180px] h-[180px] justify-center items-center">
-                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="bmw2.jpg" alt="">
+                            <img class="w-40 h-40 object-cover object-bottom-right rounded-lg" src="img/bmw2.jpg" alt="">
                         </div>
                         <p class="font-medium pl-2">Play</p>
                         <h5 class="font-medium pl-2 text-[14px] text-[#b2aeae]">Balder's Gate 3</h5>
@@ -336,11 +325,11 @@
                 <div class="h-16 gap-8 flex items-center">
                     <div class="w-0.5"></div>
                     <div id="buttons" class="h-16 gap-8 flex justify-center items-center relative md:left-[40%] left-[28%]">
-                        <img id="previuos" src="previous.svg" alt=""><img id="pause" src="pause.svg" alt=""><img id="next" src="next.svg" alt="">
+                        <img id="previuos" src="img/previous.svg" alt=""><img id="pause" src="img/pause.svg" alt=""><img id="next" src="img/next.svg" alt="">
                     </div>
 
                     <div class="h-16 md:gap-2 flex md:flex-row flex-col justify-evenly items-center relative md:left-[62%] left-[25%]">
-                        <img id="volID" width="20px" class="w-auto md:flex hidden" src="volume.svg" alt="">
+                        <img id="volID" width="20px" class="w-auto md:flex hidden" src="img/volume.svg" alt="">
                         <input class="cursor-pointer md:w-24 w-[70px] md:h-1.5 h-1 accent-white"
                          type="range" name="vol" id="volume">
                     </div>
@@ -370,7 +359,7 @@
     </div>
 
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
